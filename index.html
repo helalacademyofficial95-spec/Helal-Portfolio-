@@ -49,6 +49,7 @@
   --line: #D8E2EC; --accent: #087F62; --accent-ink: #FFFFFF; --accent-soft: #DDF6EC;
   color-scheme: light;
 }
+:root[data-theme="light"] .sidebar { background: rgba(245,248,252,.95); }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -66,26 +67,26 @@ body {
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-/* Header */
-.top {
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 12px 24px; padding-block: 20px;
-}
-.mark { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; text-decoration: none; }
-.top nav { align-items: center; }
-.home-link { display: inline-flex; align-items: center; gap: 7px; }
-.theme-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); font: 500 12px var(--mono); cursor: pointer; }
+/* Fixed sidebar navigation */
+.wrap { max-width: 1080px; margin-left: max(190px, calc((100vw - 1080px) / 2 + 150px)); margin-right: max(28px, calc((100vw - 1380px) / 2)); }
+.sidebar { position: fixed; inset: 0 auto 0 0; z-index: 20; width: 154px; padding: 28px 12px; display: flex; flex-direction: column; align-items: stretch; gap: 30px; background: rgba(7,18,31,.94); border-right: 1px solid var(--line); backdrop-filter: blur(16px); }
+.brand-mark { display: grid; place-items: center; width: 42px; height: 42px; margin: 0 auto 12px; color: var(--accent); }
+.brand-mark svg { width: 30px; height: 30px; }
+.sidebar nav { display: flex; flex-direction: column; gap: 8px; }
+.sidebar nav a { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: var(--muted); font-weight: 600; font-size: 13px; transition: background .18s,color .18s; }
+.sidebar nav a svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.sidebar nav a:hover, .sidebar nav a[href="#top"] { background: var(--accent-soft); color: var(--accent); }
+.theme-toggle { position: fixed; z-index: 25; top: 22px; right: 28px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); font: 500 12px var(--mono); cursor: pointer; }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-.theme-toggle svg, .home-link svg { width: 16px; height: 16px; flex: 0 0 auto; }
-.home-link svg { width: 14px; height: 14px; }
-.top nav { display: flex; flex-wrap: wrap; gap: 4px 22px; }
-.top nav a {
-  font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--muted); text-decoration: none; padding-block: 4px;
-}
-.top nav a:hover { color: var(--accent); }
+.theme-toggle svg { width: 16px; height: 16px; flex: 0 0 auto; }
+.top { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.home-link { display: inline-flex; align-items: center; gap: 7px; }
 
 /* Hero */
+.service-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; max-width: 700px; margin: 0 0 30px; }
+.service-chip { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 10px 18px; border: 1px solid rgba(34,211,238,.48); border-radius: 999px; background: linear-gradient(135deg, rgba(5,39,64,.82), rgba(9,25,43,.72)); color: var(--fg); font-size: 12px; font-weight: 700; letter-spacing: .035em; text-transform: uppercase; white-space: nowrap; }
+.service-chip b { font-size: 18px; color: var(--accent); }
+.service-chip:nth-child(2), .service-chip:nth-child(4) { border-color: rgba(14,165,233,.62); }
 .hero {
   display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
   gap: 40px 56px; align-items: center; padding-block: 48px 64px;
@@ -108,7 +109,7 @@ a { color: inherit; }
 }
 h1 {
   font-family: var(--display); font-weight: 800; letter-spacing: -0.045em; line-height: 1.02;
-  font-size: clamp(2.7rem, 6.4vw, 5rem); margin: 0 0 22px; text-wrap: balance; max-width: 15ch;
+  font-size: clamp(2.7rem, 5.5vw, 4.65rem); margin: 0 0 22px; text-wrap: balance; max-width: 16ch;
 }
 .hero-highlight { color: var(--accent); }
 .lede { font-size: 1.125rem; color: var(--muted); max-width: 52ch; margin: 0 0 28px; }
@@ -126,7 +127,9 @@ h1 {
 .btn-line { background: transparent; color: var(--accent); }
 .btn-line:hover { background: var(--accent); color: var(--accent-ink); }
 
-.portrait { margin: 0; justify-self: end; width: 100%; max-width: 340px; }
+.portrait { margin: 0; justify-self: center; width: 100%; max-width: 265px; position: relative; isolation: isolate; }
+.portrait::before { content: ""; position: absolute; z-index: -1; inset: 8% -7% 6% 7%; border-radius: 28px; background: linear-gradient(145deg, rgba(20,220,190,.45), rgba(14,165,233,.16)); transform: rotate(7deg); filter: blur(1px); }
+.portrait::after { content: ""; position: absolute; z-index: -2; inset: 16% -12% 0 0; border: 1px solid rgba(34,211,238,.26); border-radius: 28px; transform: rotate(-8deg); }
 .portrait img {
   display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top;
   border-radius: 22px; border: 1px solid rgba(124,240,195,.32); box-shadow: 0 24px 70px rgba(0,0,0,.34);
@@ -266,7 +269,18 @@ footer {
   .hero { grid-template-columns: minmax(0, 1fr); padding-block: 16px 40px; }
   .ledger { grid-template-columns: minmax(0, 1fr); }
   .ledger li:first-child { grid-column: auto; padding: 26px; }
-  .portrait { order: -1; justify-self: start; max-width: 240px; }
+  .portrait { order: 0; justify-self: center; max-width: 210px; }
+  .wrap { margin: 0 auto; padding-inline: 16px; }
+  .sidebar { width: 100%; height: auto; inset: 0 0 auto 0; padding: 8px 12px; flex-direction: row; align-items: center; gap: 12px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .brand-mark { width: 34px; height: 34px; margin: 0; flex: 0 0 auto; }
+  .sidebar nav { flex-direction: row; flex: 1; justify-content: space-around; gap: 2px; }
+  .sidebar nav a { min-height: 40px; justify-content: center; padding: 8px; }
+  .sidebar nav a span { font-size: 11px; }
+  .sidebar nav a svg { display: none; }
+  .theme-toggle { top: 68px; right: 16px; min-height: 36px; }
+  main { padding-top: 70px; }
+  .service-chips { max-width: 100%; gap: 8px; padding-right: 4px; }
+  .service-chip { min-height: 40px; padding: 8px 12px; font-size: 10px; }
   .sec-head, .ledger li, .role, .contact-row, .about { grid-template-columns: minmax(0, 1fr); }
   .projects, .steps { grid-template-columns: minmax(0, 1fr); }
   section { padding-block: 56px 0; }
@@ -277,6 +291,12 @@ footer {
     background: var(--accent); color: var(--accent-ink); font: 600 15px/1 var(--body); text-decoration: none;
     border-radius: 999px; box-shadow: 0 6px 20px rgba(13, 27, 46, 0.25);
   }
+}
+@media (min-width: 761px) and (max-width: 1050px) {
+  .wrap { margin-left: 178px; margin-right: 24px; }
+  .hero { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 28px; }
+  .portrait { max-width: 220px; }
+  .service-chip { padding-inline: 12px; font-size: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -295,22 +315,28 @@ img { max-width: 100%; }
 
 <div class="wrap">
   <a class="skip" href="#top">Skip to content</a>
-  <header class="top">
-    <a class="mark" href="#top" aria-label="Go to top"></a>
-    <nav aria-label="Sections">
-      <a class="home-link" href="#top" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/></svg>Home</a>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to day mode" aria-pressed="false"><svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2"/><path d="M12 19v2"/><path d="m4.22 4.22 1.42 1.42"/><path d="m18.36 18.36 1.42 1.42"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="m4.22 19.78 1.42-1.42"/><path d="m18.36 5.64 1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg><span id="theme-label">Day mode</span></button>
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand-mark" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5"/><path d="m16 7 5 5-5 5"/><path d="m14 4-4 16"/></svg></a>
+    <nav>
+      <a href="#top" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/></svg><span>Home</span></a>
+      <a href="#services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.2-1.6l1.4-1.1-1.5-2.6-1.7.6a7 7 0 0 0-1.4-.8L15.3 4h-3l-.3 2.5a7 7 0 0 0-1.4.8l-1.7-.6-1.5 2.6 1.4 1.1a7 7 0 0 0 0 3.2l-1.4 1.1 1.5 2.6 1.7-.6a7 7 0 0 0 1.4.8l.3 2.5h3l.3-2.5a7 7 0 0 0 1.4-.8l1.7.6 1.5-2.6-1.4-1.1A7 7 0 0 0 19 12Z"/></svg><span>Services</span></a>
+      <a href="#projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h7l2 2h9v10H3z"/><path d="M3 7V5h7l2 2"/></svg><span>Projects</span></a>
+      <a href="#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"/></svg><span>Experience</span></a>
+      <a href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Contact</span></a>
     </nav>
-  </header>
+  </aside>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to day mode" aria-pressed="false"><svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2"/><path d="M12 19v2"/><path d="m4.22 4.22 1.42 1.42"/><path d="m18.36 18.36 1.42 1.42"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="m4.22 19.78 1.42-1.42"/><path d="m18.36 5.64 1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg><span id="theme-label">Day mode</span></button>
 
   <main id="top">
     <div class="hero">
       <div>
-        <p class="eyebrow">WEB DEVELOPMENT · DATA ENTRY · VIRTUAL ASSISTANCE · CREDIT REPAIR · LEAD GENERATION</p>
+        <div class="service-chips" aria-label="Core services">
+          <span class="service-chip"><b>⌘</b> Web Development</span>
+          <span class="service-chip"><b>▤</b> Data Entry</span>
+          <span class="service-chip"><b>♙</b> Virtual Assistance</span>
+          <span class="service-chip"><b>⬡</b> Credit Repair</span>
+          <span class="service-chip"><b>♧</b> Lead Generation</span>
+        </div>
         <h1>Hi, I’m Helal.<br><span class="hero-highlight">Web Developer</span> &amp; Data Solutions Specialist.</h1>
         <p class="lede">
           I design and build responsive websites and interactive tools for businesses, then help teams research, extract, and organize online data into clear datasets and prospect lists. <strong>5 years</strong> of freelance experience, plus <strong>6 months</strong> as a credit repair specialist for a US company.
