@@ -20,28 +20,28 @@
 <style>
 /* Layout: split hero (statement + framed portrait), then ruled sections like a ledger: services, experience, projects, contact. */
 :root {
-  --bg: #F2F5F9;
-  --surface: #FFFFFF;
-  --fg: #0D1B2E;
-  --muted: #4A5D74;
-  --line: #D3DCE7;
-  --accent: #2C6AAE;
-  --accent-ink: #FFFFFF;
-  --accent-soft: #E1ECF8;
+  --bg: #081321;
+  --surface: #102137;
+  --fg: #EDF6FA;
+  --muted: #A7BACB;
+  --line: #263D55;
+  --accent: #7CF0C3;
+  --accent-ink: #081321;
+  --accent-soft: #183B3B;
   --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body: "DM Sans", "Segoe UI", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0A1523; --surface: #101F33; --fg: #E7EEF7; --muted: #9AAEC5;
-    --line: #213650; --accent: #72AAE8; --accent-ink: #0A1523; --accent-soft: #15304E;
+    --bg: #081321; --surface: #102137; --fg: #EDF6FA; --muted: #A7BACB;
+    --line: #263D55; --accent: #7CF0C3; --accent-ink: #081321; --accent-soft: #183B3B;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0A1523; --surface: #101F33; --fg: #E7EEF7; --muted: #9AAEC5;
-  --line: #213650; --accent: #72AAE8; --accent-ink: #0A1523; --accent-soft: #15304E;
+  --bg: #081321; --surface: #102137; --fg: #EDF6FA; --muted: #A7BACB;
+  --line: #263D55; --accent: #7CF0C3; --accent-ink: #081321; --accent-soft: #183B3B;
   color-scheme: dark;
 }
 
@@ -77,8 +77,11 @@ a { color: inherit; }
 /* Hero */
 .hero {
   display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-  gap: 40px 56px; align-items: center; padding-block: 40px 56px;
+  gap: 40px 56px; align-items: center; padding-block: 48px 64px;
+  position: relative;
 }
+.hero > div:first-child { position: relative; z-index: 1; }
+.hero::before { content: ""; position: absolute; width: 360px; height: 360px; left: -100px; top: 10px; background: radial-gradient(circle, rgba(124,240,195,.13), transparent 68%); pointer-events: none; }
 .eyebrow {
   font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--accent); margin: 0 0 18px;
@@ -91,11 +94,12 @@ h1 {
 .lede strong { color: var(--fg); font-weight: 600; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 20px;
-  font: 600 15px/1 var(--body); text-decoration: none; border-radius: 4px;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 11px 21px;
+  font: 600 15px/1 var(--body); text-decoration: none; border-radius: 999px;
   border: 1.5px solid var(--accent); cursor: pointer;
-  transition: background-color .15s, color .15s;
+  transition: background-color .18s, color .18s, transform .18s;
 }
+.btn:hover { transform: translateY(-2px); }
 .btn-solid { background: var(--accent); color: var(--accent-ink); }
 .btn-solid:hover { background: transparent; color: var(--accent); }
 .btn-line { background: transparent; color: var(--accent); }
@@ -104,7 +108,7 @@ h1 {
 .portrait { margin: 0; justify-self: end; width: 100%; max-width: 340px; }
 .portrait img {
   display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top;
-  border-radius: 4px; border: 1px solid var(--line);
+  border-radius: 22px; border: 1px solid rgba(124,240,195,.32); box-shadow: 0 24px 70px rgba(0,0,0,.34);
 }
 .portrait figcaption {
   display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
@@ -131,13 +135,20 @@ h2 {
 .sec-head p { margin: 0; color: var(--muted); max-width: 56ch; }
 
 /* Services ledger */
-.ledger { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--fg); }
+.ledger { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .ledger li {
-  display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 6px 56px;
-  padding-block: 20px; border-bottom: 1px solid var(--line);
+  position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 12px;
+  padding: 26px; min-height: 180px; border: 1px solid var(--line); border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012)), var(--surface);
+  box-shadow: 0 12px 32px rgba(0,0,0,.12); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
-.ledger h3 { font-family: var(--display); font-size: 1.25rem; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
+.ledger li::before { content: "SERVICE"; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--accent); }
+.ledger li:first-child { grid-column: 1 / -1; min-height: 210px; padding: 32px; border-color: rgba(124,240,195,.55); background: radial-gradient(circle at 90% 5%, rgba(124,240,195,.16), transparent 38%), linear-gradient(145deg, #132D3E, #102137 65%); }
+.ledger li:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 18px 42px rgba(0,0,0,.22); }
+.ledger h3 { font-family: var(--display); font-size: 1.35rem; font-weight: 700; margin: 0; letter-spacing: -0.01em; }
 .ledger p { margin: 0; color: var(--muted); max-width: 60ch; }
+.ledger li:first-child h3 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--fg); }
+.ledger li:first-child p { max-width: 70ch; }
 
 /* Experience */
 .roles { display: flex; flex-direction: column; border-top: 1px solid var(--fg); }
@@ -158,9 +169,13 @@ h2 {
 /* Projects */
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .project {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 24px;
-  display: flex; flex-direction: column; gap: 12px; min-width: 0;
+  position: relative; overflow: hidden; background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.01)), var(--surface);
+  border: 1px solid var(--line); border-radius: 18px; padding: 26px;
+  display: flex; flex-direction: column; gap: 14px; min-width: 0; box-shadow: 0 12px 32px rgba(0,0,0,.12);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
+.project:hover { transform: translateY(-4px); border-color: rgba(124,240,195,.72); box-shadow: 0 20px 44px rgba(0,0,0,.22); }
+.project .tag { display: inline-flex; align-self: flex-start; padding: 6px 10px; border: 1px solid rgba(124,240,195,.22); background: var(--accent-soft); border-radius: 999px; }
 .project .tag { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0; }
 .project h3 { font-family: var(--display); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.015em; margin: 0; line-height: 1.15; }
 .project p.desc { margin: 0; color: var(--muted); flex: 1; }
@@ -228,6 +243,8 @@ footer {
 
 @media (max-width: 760px) {
   .hero { grid-template-columns: minmax(0, 1fr); padding-block: 16px 40px; }
+  .ledger { grid-template-columns: minmax(0, 1fr); }
+  .ledger li:first-child { grid-column: auto; padding: 26px; }
   .portrait { order: -1; justify-self: start; max-width: 240px; }
   .sec-head, .ledger li, .role, .contact-row, .about { grid-template-columns: minmax(0, 1fr); }
   .projects, .steps { grid-template-columns: minmax(0, 1fr); }
@@ -242,9 +259,10 @@ footer {
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .btn { transition: none; }
+  .btn, .project, .ledger li { transition: none; }
+  .project:hover, .ledger li:hover, .btn:hover { transform: none; }
 }
-html { color-scheme: light; }
+html { color-scheme: dark; }
 body { margin: 0; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
@@ -268,10 +286,10 @@ img { max-width: 100%; }
   <main id="top">
     <div class="hero">
       <div>
-        <p class="eyebrow">DATA RESEARCH · WEB SCRAPING · LEAD GENERATION</p>
-        <h1>Reliable data research. Better lead lists. Practical web tools.</h1>
+        <p class="eyebrow">WEB DEVELOPMENT · DATA SOLUTIONS · AUTOMATION</p>
+        <h1>I build modern websites, useful web tools, and reliable data solutions.</h1>
         <p class="lede">
-          I help businesses research, extract, and organize online data into clear datasets and prospect lists. I also build practical websites and web tools. <strong>5 years</strong> of freelance experience, plus <strong>6 months</strong> as a credit repair specialist for a US company.
+          I design and build responsive websites and interactive tools for businesses, then help teams research, extract, and organize online data into clear datasets and prospect lists. <strong>5 years</strong> of freelance experience, plus <strong>6 months</strong> as a credit repair specialist for a US company.
         </p>
         <div class="actions">
           <a class="btn btn-solid" href="https://wa.me/8801576791687" target="_blank" rel="noopener">Start a project</a>
@@ -310,25 +328,30 @@ img { max-width: 100%; }
         <h2 id="services-h">What I can take off your plate</h2>
       </div>
       <ul class="ledger">
-        <li>
-          <h3>Data entry</h3>
-          <p>Clean, accurate records in spreadsheets and databases, checked before they reach you.</p>
+        <li class="featured">
+          <h3>Website Design &amp; Development</h3>
+          <p>Modern, responsive websites, landing pages, interactive dashboards and practical web tools built around real business needs. I use tools such as Codex, GitHub and Vercel to build and publish working demos.</p>
+          <ul class="tools"><li>HTML &amp; CSS</li><li>JavaScript</li><li>GitHub</li><li>Vercel</li><li>Codex</li></ul>
         </li>
         <li>
-          <h3>Data mining</h3>
-          <p>Collecting publicly available business information and organizing it into sheets you can use right away.</p>
+          <h3>Web Scraping &amp; Data Extraction</h3>
+          <p>Collecting publicly available information from websites and organizing useful results into structured datasets.</p>
         </li>
         <li>
-          <h3>Lead generation</h3>
-          <p>Contact lists built around the customers you want to reach, ready for outreach.</p>
+          <h3>Lead Generation &amp; List Building</h3>
+          <p>Targeted prospect lists and business research organized to support outreach and sales workflows.</p>
         </li>
         <li>
-          <h3>Credit repair support</h3>
-          <p>Worked as a credit repair specialist at Next Level Wealth, a US-based company.</p>
+          <h3>Data Research &amp; Analysis</h3>
+          <p>Online research, data mining, spreadsheet cleanup and clear, consistent Excel-ready records.</p>
         </li>
         <li>
-          <h3>Websites and web tools</h3>
-          <p>Landing pages, dashboards and small tools, built with Codex, v0 and GitHub and published on Vercel.</p>
+          <h3>Data Entry &amp; Virtual Assistance</h3>
+          <p>Careful data entry, PDF conversion and repetitive online tasks handled with attention to detail.</p>
+        </li>
+        <li>
+          <h3>Credit Repair Support</h3>
+          <p>Experience supporting credit repair workflows for a US-based company.</p>
         </li>
       </ul>
     </section>
