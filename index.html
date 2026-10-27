@@ -81,6 +81,15 @@ a { color: inherit; }
   position: relative;
 }
 .hero > div:first-child { position: relative; z-index: 1; }
+@keyframes heroFloatUp {
+  from { opacity: 0; transform: translateY(34px); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.hero .eyebrow { animation: heroFloatUp .8s cubic-bezier(.2,.7,.2,1) .08s both; }
+.hero h1 { animation: heroFloatUp .95s cubic-bezier(.2,.7,.2,1) .22s both; }
+.hero .lede { animation: heroFloatUp .85s cubic-bezier(.2,.7,.2,1) .42s both; }
+.hero .actions { animation: heroFloatUp .8s cubic-bezier(.2,.7,.2,1) .58s both; }
+.hero .portrait { animation: heroFloatUp 1s cubic-bezier(.2,.7,.2,1) .32s both; }
 .hero::before { content: ""; position: absolute; width: 360px; height: 360px; left: -100px; top: 10px; background: radial-gradient(circle, rgba(124,240,195,.13), transparent 68%); pointer-events: none; }
 .eyebrow {
   font-family: var(--mono); font-size: 11px; line-height: 1.9; letter-spacing: 0.08em; text-transform: uppercase;
@@ -262,6 +271,7 @@ footer {
   html { scroll-behavior: auto; }
   .btn, .project, .ledger li { transition: none; }
   .project:hover, .ledger li:hover, .btn:hover { transform: none; }
+  .hero .eyebrow, .hero h1, .hero .lede, .hero .actions, .hero .portrait { animation: none; opacity: 1; filter: none; transform: none; }
 }
 html { color-scheme: dark; }
 body { margin: 0; }
