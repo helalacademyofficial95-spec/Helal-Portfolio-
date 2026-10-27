@@ -3,8 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Helal Sheikh, freelance data specialist and web builder from Khulna, Bangladesh. Data entry, data mining, lead generation and web projects.">
 <title>Helal Sheikh Portfolio</title>
+<meta name="description" content="Helal Sheikh is a freelance data specialist and web builder in Khulna, Bangladesh. Data entry, data mining, lead generation and websites.">
+<meta name="theme-color" content="#2C6AAE">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Helal Sheikh | Data Specialist and Web Builder">
+<meta property="og:description" content="Data entry, data mining, lead generation and web projects from Khulna, Bangladesh. 5 years of freelance experience.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232C6AAE'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='30' font-weight='700' text-anchor='middle' fill='white'%3EHS%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Helal Sheikh","jobTitle":"Freelance data specialist and web builder","email":"mdhelalsheikh2281@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Khulna","addressCountry":"BD"},"alumniOf":"Khulna Government Polytechnic","knowsAbout":["Data entry","Data mining","Lead generation","Credit repair","Web development"]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -181,12 +190,55 @@ footer {
   font-family: var(--mono); font-size: 12px; color: var(--muted);
 }
 
+.skip { position: absolute; left: -999px; top: 8px; background: var(--accent); color: var(--accent-ink); padding: 8px 14px; border-radius: 4px; z-index: 20; text-decoration: none; }
+.skip:focus { left: 8px; }
+
+/* About */
+.about { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 12px 56px; }
+.about div p { margin: 0 0 14px; color: var(--muted); max-width: 60ch; }
+.about div p:last-child { margin-bottom: 0; }
+
+/* Project case lines */
+.case { margin: 0; display: grid; gap: 10px; flex: 1; align-content: start; }
+.case div { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 12px; }
+.case dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg); padding-top: 4px; }
+.case dd { margin: 0; color: var(--muted); }
+.project .note { font-size: 13px; color: var(--muted); margin: 0; }
+.more { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.more p { margin: 0; color: var(--muted); }
+
+/* Process */
+.steps { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--fg); counter-reset: step; }
+.steps li { padding-top: 20px; counter-increment: step; }
+.steps li::before { content: "Step " counter(step); display: block; margin-bottom: 8px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.steps h3 { font-family: var(--display); font-size: 1.25rem; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+.steps p { margin: 0; color: var(--muted); }
+
+/* FAQ */
+.faq { border-top: 1px solid var(--fg); }
+.faq details { border-bottom: 1px solid var(--line); padding-block: 18px; }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 16px; font-family: var(--display); font-size: 1.125rem; font-weight: 600; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--mono); color: var(--accent); }
+.faq details[open] summary::after { content: "\2013"; }
+.faq details p { margin: 10px 0 0; color: var(--muted); max-width: 60ch; }
+
+/* Floating call to action (phones) */
+.float-cta { display: none; }
+
 @media (max-width: 760px) {
   .hero { grid-template-columns: minmax(0, 1fr); padding-block: 16px 40px; }
   .portrait { order: -1; justify-self: start; max-width: 240px; }
-  .sec-head, .ledger li, .role, .contact-row { grid-template-columns: minmax(0, 1fr); }
-  .projects { grid-template-columns: minmax(0, 1fr); }
+  .sec-head, .ledger li, .role, .contact-row, .about { grid-template-columns: minmax(0, 1fr); }
+  .projects, .steps { grid-template-columns: minmax(0, 1fr); }
   section { padding-block: 56px 0; }
+  body { padding-bottom: 96px; }
+  .float-cta {
+    display: inline-flex; align-items: center; min-height: 48px; padding: 12px 22px; position: fixed; z-index: 5;
+    right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    background: var(--accent); color: var(--accent-ink); font: 600 15px/1 var(--body); text-decoration: none;
+    border-radius: 999px; box-shadow: 0 6px 20px rgba(13, 27, 46, 0.25);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -202,12 +254,13 @@ img { max-width: 100%; }
 
 
 <div class="wrap">
+  <a class="skip" href="#top">Skip to content</a>
   <header class="top">
     <a class="mark" href="#top">Helal Sheikh</a>
     <nav aria-label="Sections">
       <a href="#services">Services</a>
-      <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -215,16 +268,16 @@ img { max-width: 100%; }
   <main id="top">
     <div class="hero">
       <div>
-        <p class="eyebrow">Freelancer · Khulna, Bangladesh</p>
-        <h1>Reliable data work, and websites to go with it.</h1>
+        <p class="eyebrow">Freelance data specialist and web builder</p>
+        <h1>Clean data, lead lists and websites that work.</h1>
         <p class="lede">
-          I have <strong>5 years</strong> of freelance experience in data entry, data mining and lead generation,
-          plus <strong>6 months</strong> as a credit repair specialist for a US company. Lately I also design and
-          ship web apps with Codex, v0 and GitHub.
+          I help businesses hand off data entry, data mining and lead generation, and I build simple websites
+          and web tools. <strong>5 years</strong> of freelance experience, plus <strong>6 months</strong>
+          as a credit repair specialist for a US company.
         </p>
         <div class="actions">
-          <a class="btn btn-solid" href="https://wa.me/8801576791687" target="_blank" rel="noopener">Message on WhatsApp</a>
-          <a class="btn btn-line" href="#projects">See my projects</a>
+          <a class="btn btn-solid" href="https://wa.me/8801576791687" target="_blank" rel="noopener">Start a project</a>
+          <a class="btn btn-line" href="#projects">See my work</a>
         </div>
       </div>
       <figure class="portrait">
@@ -239,6 +292,19 @@ img { max-width: 100%; }
       <li><b>4 live projects</b><span>built and deployed on Vercel</span></li>
       <li><b>Diploma</b><span>Civil Engineering</span></li>
     </ul>
+
+    <section id="about" aria-labelledby="about-h">
+      <div class="about">
+        <div>
+          <p class="label">About</p>
+          <h2 id="about-h">Careful with details</h2>
+        </div>
+        <div>
+          <p>I am Helal Sheikh, a freelancer from Khulna, Bangladesh. My civil engineering diploma trained me to work with exact measurements and checked figures, and I bring the same habit to spreadsheets and data.</p>
+          <p>I work remotely, including with a US company, and I keep communication simple: you tell me what you need, I confirm the scope, and I send the work with the files organized.</p>
+        </div>
+      </div>
+    </section>
 
     <section id="services" aria-labelledby="services-h">
       <div class="sec-head">
@@ -267,6 +333,74 @@ img { max-width: 100%; }
           <p>Landing pages, dashboards and small tools, built with Codex, v0 and GitHub and published on Vercel.</p>
         </li>
       </ul>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-h">
+      <div class="sec-head">
+        <p class="label">Projects</p>
+        <h2 id="projects-h">Live sites I have built</h2>
+        <p>Every project is deployed and open to try. All were built with Codex, v0 and GitHub and are hosted on Vercel.</p>
+      </div>
+      <div class="projects">
+        <article class="project">
+          <p class="tag">Web app</p>
+          <h3>Planomate</h3>
+          <dl class="case">
+            <div><dt>Problem</dt><dd>Getting a first floor plan idea usually means waiting for a designer.</dd></div>
+            <div><dt>Built</dt><dd>A free tool that creates a dimensioned 2D and 3D plan from floor area, plot shape and room list, with alternative layouts, a room schedule and PNG or SVG export.</dd></div>
+          </dl>
+          <p class="note">Concept plans only, not construction drawings.</p>
+          <div class="links"><a class="btn btn-line btn-sm" href="https://planomate.vercel.app/" target="_blank" rel="noopener">Open Planomate ↗</a></div>
+        </article>
+        <article class="project">
+          <p class="tag">Demo dashboard</p>
+          <h3>ServeFlow</h3>
+          <dl class="case">
+            <div><dt>Problem</dt><dd>Kitchen staff need to see new orders and their status at a glance.</dd></div>
+            <div><dt>Built</dt><dd>An order dashboard with status filters, search and a way to reset the sample data, plus a demo menu site for the same restaurant.</dd></div>
+          </dl>
+          <p class="note">Uses sample data. No payments are processed.</p>
+          <div class="links">
+            <a class="btn btn-line btn-sm" href="https://serveflow-seven.vercel.app/dashboard" target="_blank" rel="noopener">Open dashboard ↗</a>
+            <a class="btn btn-line btn-sm" href="https://serveflow-demo-psi.vercel.app/#menu" target="_blank" rel="noopener">Open demo site ↗</a>
+          </div>
+        </article>
+        <article class="project">
+          <p class="tag">Company website</p>
+          <h3>Next Level Wealth</h3>
+          <dl class="case">
+            <div><dt>Problem</dt><dd>People want to understand their credit profile and know what to do next.</dd></div>
+            <div><dt>Built</dt><dd>A website for a credit repair company, with its approach, a three-step process, the team and a contact page.</dd></div>
+          </dl>
+          <div class="links"><a class="btn btn-line btn-sm" href="https://nextlevelwealth.vercel.app/" target="_blank" rel="noopener">Open website ↗</a></div>
+        </article>
+        <article class="project">
+          <p class="tag">Data tool</p>
+          <h3>Company Web Scraper</h3>
+          <dl class="case">
+            <div><dt>Problem</dt><dd>Copying business contact details by hand from pages and directories is slow.</dd></div>
+            <div><dt>Built</dt><dd>A tool that gathers emails, phone numbers and addresses from a public company page or directory and exports them to CSV.</dd></div>
+          </dl>
+          <p class="note">Public information only.</p>
+          <div class="links"><a class="btn btn-line btn-sm" href="https://company-web-scraper.vercel.app/" target="_blank" rel="noopener">Open tool ↗</a></div>
+        </article>
+      </div>
+      <div class="more">
+        <p>Need something similar for your business?</p>
+        <a class="btn btn-solid btn-sm" href="https://wa.me/8801576791687" target="_blank" rel="noopener">Start a project</a>
+      </div>
+    </section>
+
+    <section id="process" aria-labelledby="process-h">
+      <div class="sec-head">
+        <p class="label">Process</p>
+        <h2 id="process-h">How a project works</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Send the details</h3><p>Message me on WhatsApp or email with the task, a sample file or link, and your deadline.</p></li>
+        <li><h3>Agree the scope</h3><p>I confirm what I will deliver, in what format and by when, before I start.</p></li>
+        <li><h3>Receive the work</h3><p>I deliver the finished files or site. If something needs a change, tell me and I will fix it.</p></li>
+      </ol>
     </section>
 
     <section id="experience" aria-labelledby="experience-h">
@@ -298,7 +432,7 @@ img { max-width: 100%; }
             <p class="where">Self-directed projects</p>
           </div>
           <div>
-            <p class="desc">Learned to build and publish working websites and tools. Four of them are live and listed below.</p>
+            <p class="desc">Learned to build and publish working websites and tools. Four of them are live and listed above.</p>
             <ul class="tools" aria-label="Tools">
               <li>Codex</li><li>v0</li><li>GitHub</li><li>Vercel</li>
             </ul>
@@ -310,49 +444,33 @@ img { max-width: 100%; }
             <h3>Diploma in Civil Engineering</h3>
             <p class="where">Khulna Government Polytechnic</p>
           </div>
-          <p class="desc">Technical training that shapes how I handle measurements, layouts and detail-heavy work.</p>
+          <p class="desc">Diploma program in civil engineering from Khulna Government Polytechnic.</p>
         </article>
       </div>
     </section>
 
-    <section id="projects" aria-labelledby="projects-h">
+    <section id="faq" aria-labelledby="faq-h">
       <div class="sec-head">
-        <p class="label">Projects</p>
-        <h2 id="projects-h">Live sites I have built</h2>
-        <p>Every project below is deployed and open to try.</p>
+        <p class="label">FAQ</p>
+        <h2 id="faq-h">Before you message me</h2>
       </div>
-      <div class="projects">
-        <article class="project">
-          <p class="tag">Web app</p>
-          <h3>Planomate</h3>
-          <p class="desc">A free floor plan generator. Enter the floor area, plot shape and rooms you need to get a dimensioned 2D and 3D plan, alternative layouts, a room schedule and PNG or SVG export.</p>
-          <p class="domain">planomate.vercel.app</p>
-          <div class="links"><a class="btn btn-line btn-sm" href="https://planomate.vercel.app/" target="_blank" rel="noopener">Open Planomate ↗</a></div>
-        </article>
-        <article class="project">
-          <p class="tag">Dashboard</p>
-          <h3>ServeFlow</h3>
-          <p class="desc">An order dashboard for a restaurant kitchen. Staff filter and search orders and move them from New to Delivered. Shown with a demo menu site for the same restaurant.</p>
-          <p class="domain">serveflow-seven.vercel.app · serveflow-demo-psi.vercel.app</p>
-          <div class="links">
-            <a class="btn btn-line btn-sm" href="https://serveflow-seven.vercel.app/dashboard" target="_blank" rel="noopener">Open dashboard ↗</a>
-            <a class="btn btn-line btn-sm" href="https://serveflow-demo-psi.vercel.app/#menu" target="_blank" rel="noopener">Open demo site ↗</a>
-          </div>
-        </article>
-        <article class="project">
-          <p class="tag">Company website</p>
-          <h3>Next Level Wealth</h3>
-          <p class="desc">A website for a credit repair company, with sections for its approach, a three-step process, the team and a contact page.</p>
-          <p class="domain">nextlevelwealth.vercel.app</p>
-          <div class="links"><a class="btn btn-line btn-sm" href="https://nextlevelwealth.vercel.app/" target="_blank" rel="noopener">Open website ↗</a></div>
-        </article>
-        <article class="project">
-          <p class="tag">Data tool</p>
-          <h3>Company Web Scraper</h3>
-          <p class="desc">Collects public business contact details such as emails, phone numbers and addresses from a company page or a public directory, and exports them to CSV.</p>
-          <p class="domain">company-web-scraper.vercel.app</p>
-          <div class="links"><a class="btn btn-line btn-sm" href="https://company-web-scraper.vercel.app/" target="_blank" rel="noopener">Open tool ↗</a></div>
-        </article>
+      <div class="faq">
+        <details open>
+          <summary>What kind of work can I send you?</summary>
+          <p>Data entry, data mining and lead generation tasks, plus small websites and web tools. Send a short description or a sample file and I will confirm what is possible.</p>
+        </details>
+        <details>
+          <summary>Which time zone do you work in?</summary>
+          <p>Bangladesh Standard Time (UTC+6). You can message me on WhatsApp or email at any time and I will reply during my working day.</p>
+        </details>
+        <details>
+          <summary>How do I get started?</summary>
+          <p>Message me on WhatsApp or email with what you need and your deadline. We agree the scope first, then I start.</p>
+        </details>
+        <details>
+          <summary>Do you build websites for other people?</summary>
+          <p>Yes. The Projects section shows what I have built so far. I use Codex, v0 and GitHub, and I publish on Vercel.</p>
+        </details>
       </div>
     </section>
 
@@ -375,7 +493,7 @@ img { max-width: 100%; }
           <dd>
             <span class="val" id="wa-val">01576791687</span>
             <button class="copy" type="button" data-copy="wa-val">Copy</button>
-            <a class="btn btn-solid btn-sm" href="https://wa.me/8801576791687" target="_blank" rel="noopener">Open WhatsApp ↗</a>
+            <a class="btn btn-solid btn-sm" href="https://wa.me/8801576791687" target="_blank" rel="noopener">Message on WhatsApp ↗</a>
           </dd>
         </div>
         <div class="contact-row">
@@ -391,6 +509,7 @@ img { max-width: 100%; }
     <span>Data work · Lead generation · Web projects</span>
   </footer>
 </div>
+<a class="float-cta" href="https://wa.me/8801576791687" target="_blank" rel="noopener">Start a project</a>
 
 <script>
 (function () {
