@@ -44,6 +44,11 @@
   --line: #263D55; --accent: #7CF0C3; --accent-ink: #081321; --accent-soft: #183B3B;
   color-scheme: dark;
 }
+:root[data-theme="light"] {
+  --bg: #F5F8FC; --surface: #FFFFFF; --fg: #142337; --muted: #52657A;
+  --line: #D8E2EC; --accent: #087F62; --accent-ink: #FFFFFF; --accent-soft: #DDF6EC;
+  color-scheme: light;
+}
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -67,6 +72,12 @@ a { color: inherit; }
   flex-wrap: wrap; gap: 12px 24px; padding-block: 20px;
 }
 .mark { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.01em; text-decoration: none; }
+.top nav { align-items: center; }
+.home-link { display: inline-flex; align-items: center; gap: 7px; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 8px 13px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); font: 500 12px var(--mono); cursor: pointer; }
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle svg, .home-link svg { width: 16px; height: 16px; flex: 0 0 auto; }
+.home-link svg { width: 14px; height: 14px; }
 .top nav { display: flex; flex-wrap: wrap; gap: 4px 22px; }
 .top nav a {
   font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
@@ -285,12 +296,14 @@ img { max-width: 100%; }
 <div class="wrap">
   <a class="skip" href="#top">Skip to content</a>
   <header class="top">
-    <a class="mark" href="#top">Helal Sheikh</a>
+    <a class="mark" href="#top" aria-label="Go to top"></a>
     <nav aria-label="Sections">
+      <a class="home-link" href="#top" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/></svg>Home</a>
       <a href="#services">Services</a>
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to day mode" aria-pressed="false"><svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2"/><path d="M12 19v2"/><path d="m4.22 4.22 1.42 1.42"/><path d="m18.36 18.36 1.42 1.42"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="m4.22 19.78 1.42-1.42"/><path d="m18.36 5.64 1.42-1.42"/><circle cx="12" cy="12" r="4"/></svg><span id="theme-label">Day mode</span></button>
     </nav>
   </header>
 
@@ -545,6 +558,29 @@ img { max-width: 100%; }
 
 <script>
 (function () {
+  var root = document.documentElement;
+  var toggle = document.getElementById('theme-toggle');
+  var label = document.getElementById('theme-label');
+  var icon = document.getElementById('theme-icon');
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    var isDark = theme === 'dark';
+    label.textContent = isDark ? 'Day mode' : 'Night mode';
+    toggle.setAttribute('aria-label', isDark ? 'Switch to day mode' : 'Switch to night mode');
+    toggle.setAttribute('aria-pressed', String(!isDark));
+    icon.innerHTML = isDark
+      ? '<path d="M12 3v2"/><path d="M12 19v2"/><path d="m4.22 4.22 1.42 1.42"/><path d="m18.36 18.36 1.42 1.42"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="m4.22 19.78 1.42-1.42"/><path d="m18.36 5.64 1.42-1.42"/><circle cx="12" cy="12" r="4"/>'
+      : '<path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/>';
+  }
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('helal-portfolio-theme'); } catch (e) {}
+  applyTheme(savedTheme === 'light' ? 'light' : 'dark');
+  toggle.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('helal-portfolio-theme', next); } catch (e) {}
+  });
+
   var buttons = document.querySelectorAll('.copy');
   buttons.forEach(function (btn) {
     btn.addEventListener('click', function () {
