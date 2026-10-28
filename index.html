@@ -916,6 +916,67 @@ footer { border-color:var(--line); }
   }
 }
 
+
+/* Reliable fixed top navigation and theme toggle: final override */
+body { padding-top: 86px !important; }
+.sidebar {
+  position: fixed !important;
+  inset: 0 0 auto 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 76px;
+  padding: 14px max(24px, calc((100vw - 1200px) / 2)) !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  z-index: 1000 !important;
+  background: color-mix(in srgb, var(--bg) 94%, transparent) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--line) !important;
+  backdrop-filter: blur(18px);
+}
+.sidebar nav {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 5px !important;
+}
+.theme-toggle {
+  position: fixed !important;
+  top: 20px !important;
+  right: max(24px, calc((100vw - 1200px) / 2)) !important;
+  z-index: 1100 !important;
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+@media (min-width: 651px) {
+  .sidebar { padding-right: 170px !important; }
+}
+@media (max-width: 650px) {
+  body { padding: 0 15px 90px !important; padding-top: 108px !important; }
+  .sidebar {
+    min-height: 60px;
+    padding: 9px 13px !important;
+    gap: 8px !important;
+  }
+  .brand-mark { width: 38px; height: 38px; flex: 0 0 38px; }
+  .sidebar nav { flex: 1; gap: 1px !important; }
+  .sidebar nav a { min-height: 35px; padding: 7px 8px; font-size: 10px; }
+  .theme-toggle { top: 68px !important; right: 14px !important; min-height: 34px; }
+  main { padding-top: 0 !important; }
+}
+@media (max-width: 390px) {
+  .sidebar { padding-inline: 8px !important; }
+  .sidebar nav a { padding-inline: 6px; font-size: 9px; }
+  .theme-toggle { right: 12px !important; }
+}
+
 </style>
 </head>
 <body>
