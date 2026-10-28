@@ -880,6 +880,42 @@ footer { border-color:var(--line); }
   .actions .btn { flex:1 1 auto; justify-content:center; }
 }
 
+
+/* Fix: keep the main navigation visible while scrolling on every screen size. */
+.sidebar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  isolation: isolate;
+}
+@media (min-width: 651px) {
+  .sidebar {
+    width: 100% !important;
+    height: auto !important;
+    inset: auto !important;
+    margin: 0 auto !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: color-mix(in srgb, var(--bg) 90%, transparent) !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--line) !important;
+    backdrop-filter: blur(20px);
+  }
+  .sidebar nav {
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+@media (max-width: 650px) {
+  .sidebar {
+    width: calc(100% + 30px) !important;
+    margin-inline: -15px !important;
+    flex-direction: row !important;
+  }
+}
+
 </style>
 </head>
 <body>
