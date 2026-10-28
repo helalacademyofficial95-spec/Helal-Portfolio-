@@ -175,7 +175,7 @@ h2 {
 .ledger p { margin: 0; color: var(--muted); max-width: 60ch; }
 .ledger > li:first-child h3 { font-size: clamp(1.5rem, 3vw, 2rem); color: var(--fg); }
 .ledger > li:first-child p { max-width: 70ch; }
-.ledger .tools { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-top: 14px; padding: 0; list-style: none; }
+.ledger .tools { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; padding: 0; list-style: none; }
 .ledger .tools li {
   position: relative; overflow: hidden; isolation: isolate; min-width: 0; min-height: 116px; padding: 16px 12px;
   display: flex; align-items: flex-end; border: 1px solid rgba(124,240,195,.28); border-radius: 10px;
@@ -184,11 +184,12 @@ h2 {
 }
 .ledger .tools li::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(3,12,23,.94), rgba(3,12,23,.12)); }
 .ledger .tools li:nth-child(1) { background-image: url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=80"); }
-.ledger .tools li:nth-child(2) { background-image: url("https://images.unsplash.com/photo-1455390582262-044cadee4f7e?auto=format&fit=crop&w=500&q=80"); }
+.ledger .tools li:nth-child(2) { background-image: url("https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=500&q=80"); }
 .ledger .tools li:nth-child(3) { background-image: url("https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=500&q=80"); }
 .ledger .tools li:nth-child(4) { background-image: url("https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=500&q=80"); }
 .ledger .tools li:nth-child(5) { background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=80"); }
 .ledger .tools li:nth-child(6) { background-image: url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80"); }
+.ledger .tools li:nth-child(7) { background-image: url("https://images.unsplash.com/photo-1676277791608-ac54525aa94d?auto=format&fit=crop&w=500&q=80"); }
 @media (max-width: 760px) { .ledger .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* Experience */
@@ -434,7 +435,7 @@ img { max-width: 100%; }
         <li class="featured">
           <h3>Website Design &amp; Development</h3>
           <p>Modern, responsive websites, landing pages, interactive dashboards and practical web tools built around real business needs. I use tools such as Codex, GitHub and Vercel to build and publish working demos.</p>
-          <ul class="tools"><li>Codex</li><li>Claude</li><li>v0</li><li>GitHub</li><li>Vercel</li><li>Vibe Coding</li></ul>
+          <ul class="tools"><li>Codex</li><li>Claude</li><li>v0</li><li>GitHub</li><li>Vercel</li><li>Vibe Coding</li><li>ChatGPT</li></ul>
         </li>
         <li>
           <h3>Web Scraping &amp; Data Extraction</h3>
