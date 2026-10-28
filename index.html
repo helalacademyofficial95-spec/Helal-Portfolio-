@@ -977,6 +977,34 @@ body { padding-top: 86px !important; }
   .theme-toggle { right: 12px !important; }
 }
 
+
+/* Final visual fixes: hide any portrait caption and make project artwork clearer */
+.portrait figcaption,
+figure.portrait > figcaption {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.project::before {
+  opacity: 1 !important;
+  filter: saturate(1.12) contrast(1.04);
+}
+.project:hover::before {
+  opacity: 1 !important;
+}
+.project::after {
+  background:
+    linear-gradient(90deg, rgba(8,13,24,.68) 0%, rgba(8,13,24,.44) 58%, rgba(8,13,24,.24) 100%),
+    linear-gradient(0deg, rgba(8,13,24,.68) 0%, rgba(8,13,24,.08) 72%) !important;
+}
+:root[data-theme="light"] .project::after {
+  background:
+    linear-gradient(90deg, rgba(13,25,43,.70) 0%, rgba(13,25,43,.46) 58%, rgba(13,25,43,.25) 100%),
+    linear-gradient(0deg, rgba(13,25,43,.66) 0%, rgba(13,25,43,.08) 72%) !important;
+}
+
 </style>
 </head>
 <body>
